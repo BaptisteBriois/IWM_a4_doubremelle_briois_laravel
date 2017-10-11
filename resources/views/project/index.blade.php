@@ -12,8 +12,11 @@
                         @foreach($projects as $project)
                             <ul>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('projects.show', $project->id) }}">
                                         {{ $project->title }}
+                                    </a>
+                                    <a href="{{ route('projects.destroy', $project->id) }}" style="float: right; color: red;">
+                                        X
                                     </a>
                                 </li>
                             </ul>
