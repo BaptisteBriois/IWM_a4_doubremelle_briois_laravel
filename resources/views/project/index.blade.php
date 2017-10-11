@@ -20,6 +20,9 @@
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button type="submit">X</button>
                                     </form>
+                                    <a href="{{ route('projects.edit', $project->id) }}" style="float: right; color: blue;margin-right: 10px">
+                                        <button type="submit">Editer</button>
+                                    </a>
                                 </li>
                             </ul>
                         @endforeach
