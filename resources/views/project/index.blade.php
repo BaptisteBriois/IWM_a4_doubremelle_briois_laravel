@@ -15,9 +15,11 @@
                                     <a href="{{ route('projects.show', $project->id) }}">
                                         {{ $project->title }}
                                     </a>
-                                    <a href="{{ route('projects.destroy', $project->id) }}" style="float: right; color: red;">
-                                        X
-                                    </a>
+                                    <form action="{{ route('projects.destroy', $project->id ) }}" method="post" style="float: right; color: red;">
+                                        {{ csrf_field() }}
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit">X</button>
+                                    </form>
                                 </li>
                             </ul>
                         @endforeach
