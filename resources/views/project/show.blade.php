@@ -24,16 +24,28 @@
                             {{ $category->title }}
                             <hr>
                             @foreach($category->tasks() as $task)
-                                {{ $task->title }}
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        {{ $task->title }}
+                                    </div>
+                                </div>
                             @endforeach
                             <form action="{{ route('tasks.store') }}" method="post">
+
                                 {{ csrf_field() }}
+
                                 <div class="form-group">
                                     <input type="hidden" name="project_id" value="{{ $project->id }}">
                                     <input type="hidden" name="category_id" value="{{ $category->id }}">
 
-                                    <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
-                                           name="title">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
+                                               name="title">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="projectDescription" class="form-control" rows="3"
+                                                  name="description" placeholder="Description"></textarea>
+                                    </div>
                                 </div>
                             </form>
                         </div>
