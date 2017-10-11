@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\models\Project;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,13 +43,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
+//        dd($request->toArray());
         Project::create([
             'title' => $request->title,
             'description' => $request->description,
-            'admin' => Auth::user()->id
+            'admin' => json_encode([Auth::user()->id]),
+            'user' => '',
         ]);
 
-        return redirect()->route('project.index');
+        return redirect()->route('projects.index');
     }
 
     /**

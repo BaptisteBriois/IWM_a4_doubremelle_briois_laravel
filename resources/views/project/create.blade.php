@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
 
-                        <form method="POST" action="{{ route('projets.store') }}">
+                        <form method="POST" action="{{ route('projects.store') }}">
 
                             {{ csrf_field() }}
 
