@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -34,7 +35,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'project_id' => $request->project_id,
+            'category_id' => $request->category_id,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
