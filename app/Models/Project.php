@@ -11,10 +11,10 @@ class Project extends Model
     ];
 
     public function tasks() {
-        return  $this->hasMany(Task::class);
+        return  $this->hasMany(Task::class)->get();
     }
 
     public function categories() {
-        return  $this->hasMany(Category::class);
+        return  $this->hasMany(Category::class)->get();
     }
 }

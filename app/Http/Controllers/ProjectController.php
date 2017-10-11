@@ -62,8 +62,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        $categories = $project->categories()->get();
-
+        $categories = $project->categories();
 
         return view('project.show', compact('project', 'categories'));
     }
