@@ -63,6 +63,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $categories = $project->categories();
+
         return view('project.show', compact('project', 'categories'));
     }
 
