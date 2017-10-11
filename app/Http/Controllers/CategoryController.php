@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -34,7 +35,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create([
+            'title' => $request->title,
+            'project_id' => $request->project_id,
+            'order' => 0,
+        ]);
+
+        return redirect()->back();
     }
 
     /**
