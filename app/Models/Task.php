@@ -14,4 +14,12 @@ class Task extends Model
     protected $fillable = [
         'project_id', 'category_id', 'title', 'description', 'limit_date',
     ];
+
+    public function project() {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }
