@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -25,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Project::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'admin' => Auth::user()->id
+        ]);
+
+        return redirect()->route('project.index');
     }
 
     /**
