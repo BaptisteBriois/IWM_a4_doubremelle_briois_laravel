@@ -22,6 +22,25 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             {{ $category->title }}
+                            @foreach($category->tasks() as $task)
+                                {{ $task->title }}
+                            @endforeach
+
+                            <hr>
+
+                            <form action="{{ route('tasks.store') }}" method="post">
+
+                                {{ csrf_field() }}
+
+                                <div class="form-group">
+                                    <input type="hidden" name="project_id" value="{{ $project->id }}">
+                                    <input type="hidden" name="category_id" value="{{ $category->id }}">
+
+                                    <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
+                                           name="title">
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -37,7 +56,6 @@
                             <div class="form-group">
                                 <input type="hidden" name="project_id" value="{{ $project->id }}">
 
-                                <label for="categoryTitre">Titre</label>
                                 <input type="text" class="form-control" id="categoryTitre" placeholder="Titre"
                                        name="title">
                             </div>
