@@ -14,4 +14,12 @@ class Category extends Model
     protected $fillable = [
         'project_id', 'title', 'order',
     ];
+
+    public function project() {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
 }
