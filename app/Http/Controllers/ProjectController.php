@@ -43,8 +43,6 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-
-//        dd($request->toArray());
         Project::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -75,7 +73,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $project = Project::find($id);
+        return view('project.edit', compact('project'));
     }
 
     /**
@@ -87,7 +86,12 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->save();
+
+        return redirect()->route('projects.index');
     }
 
     /**
