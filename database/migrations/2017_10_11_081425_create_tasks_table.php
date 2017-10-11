@@ -19,7 +19,6 @@ class CreateTasksTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title');
             $table->text('description');
-            $table->integer('status')->unsigned()->default(0)->comment('0 : To do, 1 : Doing, 2 : Done');
             $table->date('limit_date')->nullable();
             $table->timestamps();
         });
