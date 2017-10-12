@@ -35,13 +35,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create([
+        $category = Category::create([
             'title' => $request->title,
             'project_id' => $request->project_id,
             'order' => 0,
         ]);
 
-        return redirect()->back();
+        if ($category) {
+            return response()->json(['success' => 'true', 'category' => $category]);
+        } else {
+            return response()->json(['success' => 'false']);
+        }
     }
 
     /**
