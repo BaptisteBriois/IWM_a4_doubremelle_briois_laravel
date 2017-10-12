@@ -25,9 +25,6 @@
                                 </div>
                             @endforeach
                             <form action="{{ route('tasks.store') }}" method="post">
-
-                                {{ csrf_field() }}
-
                                 <div class="form-group">
                                     <input type="hidden" name="project_id" value="{{ $project->id }}">
                                     <input type="hidden" name="category_id" value="{{ $category->id }}">
@@ -47,17 +44,12 @@
                 </div>
             @endforeach
 
-            <div class="col-category">
+            <div id="newCategory" class="col-category">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <form action="{{ route('categories.store') }}" method="post">
-
-                            {{ csrf_field() }}
-
+                        <form id="categoryForm" data-project-id="{{ $project->id }}">
                             <div class="form-group">
-                                <input type="hidden" name="project_id" value="{{ $project->id }}">
-
-                                <input type="text" class="form-control" id="categoryTitre" placeholder="Titre"
+                                <input type="text" class="form-control" id="categoryTitle" placeholder="Titre"
                                        name="title">
                             </div>
                         </form>
@@ -72,12 +64,17 @@
 
 @section('script')
     <script>
-        $(function () {
-            var count = $('.col-category').length;
-            var size = 270 * count;
-            $('#container-tasks').css('width', size);
-            console.log(count);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
         });
+
+        Routes = {
+            category_store: "{{ route('categories.store') }}",
+            task_store: "{{ route('tasks.store') }}"
+        }
     </script>
+    <script src="{{ asset('js/show.js') }}"></script>
 @endsection
 
