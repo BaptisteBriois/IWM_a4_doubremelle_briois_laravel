@@ -17,7 +17,7 @@
                         <div class="panel-heading">
                             {{ $category->title }}
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-drag panel-body">
                             @foreach($category->tasks() as $task)
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -27,14 +27,16 @@
                             @endforeach
                         </div>
                         <div class="panel-footer">
-                            <form class="newTask" data-project-id="{{ $project->id }}" data-category-id="{{ $category->id }}">
+                            <form class="newTask" data-project-id="{{ $project->id }}"
+                                  data-category-id="{{ $category->id }}">
                                 <div class="form-group">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
                                                name="title">
                                     </div>
                                     <div class="form-group">
-                                        <textarea id="projectDescription" class="form-control" rows="3" name="description" placeholder="Description"></textarea>
+                                        <textarea id="projectDescription" class="form-control" rows="3"
+                                                  name="description" placeholder="Description"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-default">Valider</button>
                                 </div>
@@ -63,6 +65,9 @@
 @endsection
 
 @section('script')
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
+
     <script>
         $.ajaxSetup({
             headers: {

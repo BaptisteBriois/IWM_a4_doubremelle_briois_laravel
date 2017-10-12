@@ -1,3 +1,5 @@
+dragula($('.panel-drag').toArray());
+
 $("#categoryForm").submit(function(e) {
     e.preventDefault();
 

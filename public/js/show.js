@@ -76,6 +76,8 @@ module.exports = __webpack_require__(42);
 /***/ 42:
 /***/ (function(module, exports) {
 
+dragula($('.panel-drag').toArray());
+
 $("#categoryForm").submit(function (e) {
     e.preventDefault();
 
