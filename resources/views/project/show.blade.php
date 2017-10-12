@@ -14,9 +14,10 @@
             @foreach($categories as $category)
                 <div class="col-category">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div class="panel-heading">
                             {{ $category->title }}
-                            <hr>
+                        </div>
+                        <div class="panel-body">
                             @foreach($category->tasks() as $task)
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -24,11 +25,10 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <form action="{{ route('tasks.store') }}" method="post">
+                        </div>
+                        <div class="panel-footer">
+                            <form class="newTask" data-project-id="{{ $project->id }}" data-category-id="{{ $category->id }}">
                                 <div class="form-group">
-                                    <input type="hidden" name="project_id" value="{{ $project->id }}">
-                                    <input type="hidden" name="category_id" value="{{ $category->id }}">
-
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
                                                name="title">
