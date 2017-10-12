@@ -37,9 +37,9 @@
                                                name="title">
                                     </div>
                                     <div class="form-group">
-                                        <textarea id="projectDescription" class="form-control" rows="3"
-                                                  name="description" placeholder="Description"></textarea>
+                                        <textarea id="projectDescription" class="form-control" rows="3" name="description" placeholder="Description"></textarea>
                                     </div>
+                                    <button type="submit" class="btn btn-default">Valider</button>
                                 </div>
                             </form>
                         </div>

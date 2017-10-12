@@ -36,10 +36,10 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         Task::create([
-            'title' => $request->title,
-            'description' => $request->description,
             'project_id' => $request->project_id,
             'category_id' => $request->category_id,
+            'title' => $request->title,
+            'description' => $request->description,
         ]);
 
         return redirect()->back();
