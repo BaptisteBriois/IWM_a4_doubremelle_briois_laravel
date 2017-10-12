@@ -10,7 +10,7 @@ $("#categoryForm").submit(function(e) {
         },
         dataType: "json"
     }).done(function (response, status, jqXHR) {
-        console.log(response.success);
+        $("#categoryTitle").val("");
         $("#newCategory").before(
             '<div class="col-category">\n' +
                 '<div class="panel panel-default">\n' +
