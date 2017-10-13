@@ -1,4 +1,5 @@
 dragula($('.panel-drag').toArray());
+$('.datepicker').pickadate();
 
 $("#categoryForm").submit(function(e) {
     e.preventDefault();

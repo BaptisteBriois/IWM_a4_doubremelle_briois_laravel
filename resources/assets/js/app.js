@@ -6,6 +6,9 @@
  */
 
 require('./bootstrap');
+require( "../../../node_modules/pickadate/lib/picker.js");
+require( "../../../node_modules/pickadate/lib/picker.date.js");
+require( "../../../node_modules/pickadate/lib/picker.time.js");
 
 window.Vue = require('vue');
 
