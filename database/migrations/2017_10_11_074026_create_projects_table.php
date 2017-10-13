@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('admin');
-            $table->text('user');
+            $table->text('viewer');
             $table->timestamps();
         });
     }

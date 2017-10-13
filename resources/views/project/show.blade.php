@@ -5,6 +5,9 @@
         <div class="row">
             <h1 class="panel-heading">{{ $project->title }}
                 <small>{{ $project->description }}</small>
+                @if(in_array($userId, json_decode($project->admin)))
+                    <a class="btn btn-primary" href="{{ route('projects.users.index', $project->id) }}">Utilisateurs</a>
+                @endif
             </h1>
         </div>
     </div>
@@ -36,7 +39,7 @@
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">Détails de la tâche</h4>
                                             </div>
-                                            <form id="taskDetail{{ $task->id }}">
+                                            <form class="taskUpdate" data-task-id="{{ $task->id }}">
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for="taskTitle">Tâche</label>
@@ -83,14 +86,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
 @endsection
 
 @section('script')
-
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
 
     <script>
@@ -102,10 +103,8 @@
 
         Routes = {
             category_store: "{{ route('categories.store') }}",
-            task_store: "{{ route('tasks.store') }}",
-            task_update: "{{ route('tasks.update') }}"
+            task_store: "{{ route('tasks.store') }}"
         }
     </script>
     <script src="{{ asset('js/show.js') }}"></script>
 @endsection
-

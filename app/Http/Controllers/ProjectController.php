@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $userId = Auth::id();
+        $allProjects = Project::all();
+
+        $projects = [];
+        foreach ($allProjects as $project) {
+            if (in_array($userId, json_decode($project->admin)) || in_array($userId, json_decode($project->viewer))) {
+                array_push($projects, $project);
+            }
+        }
+
         return view('project.index', compact('projects'));
     }
 
@@ -47,6 +57,7 @@ class ProjectController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'admin' => json_encode([Auth::user()->id]),
+            'viewer' => json_encode([]),
             'user' => '',
         ]);
 
@@ -63,8 +74,13 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $categories = $project->categories();
+        $userId = Auth::id();
 
-        return view('project.show', compact('project', 'categories'));
+        if (in_array($userId, json_decode($project->admin)) || in_array($userId, json_decode($project->viewer))) {
+            return view('project.show', compact('project', 'categories', 'userId'));
+        } else {
+            return "Vous n'avez pas les droits pour voir ce projet";
+        }
     }
 
     /**
@@ -76,6 +92,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
+
         return view('project.edit', compact('project'));
     }
 
@@ -108,5 +125,40 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects.index');
+    }
+
+    /**
+     * Get users for a specified project.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getProjectUsers($id)
+    {
+        $project = Project::find($id);
+
+        $admins = json_decode($project->admin);
+        $adminUsers = [];
+        foreach ($admins as $admin) {
+            $user = User::find($admin);
+            array_push($adminUsers, $user);
+        }
+
+        $viewers = json_decode($project->viewer);
+        $viewerUsers = [];
+        if ($project->viewer) {
+            foreach ($viewers as $viewer) {
+                $user = User::find($viewer);
+                array_push($viewerUsers, $user);
+            }
+        }
+
+        $data = [
+            'project' => $project,
+            'admins' => $adminUsers,
+            'viewers' => $viewerUsers
+        ];
+
+        return view('project.users.index', $data);
     }
 }
