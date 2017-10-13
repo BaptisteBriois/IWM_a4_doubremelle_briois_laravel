@@ -36,8 +36,6 @@ $("#categoryForm").submit(function(e) {
 
 $(".taskForm").submit(function(e) {
     e.preventDefault();
-    var url = window.location;
-    console.log(url);
 
     $.ajax({
         type: "POST",
@@ -89,23 +87,5 @@ $(".taskForm").submit(function(e) {
                 '</div>' +
             '</div>'
         )
-    });
-});
-
-$(".taskUpdate").submit(function(e) {
-    e.preventDefault();
-    var url = window.location;
-    console.log(url);
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: {
-            category_id: $(this).data('category-id'),
-            title: $(this).find("input").val()
-        },
-        dataType: "json"
-    }).done(function (response, status, jqXHR) {
-
     });
 });
