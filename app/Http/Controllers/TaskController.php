@@ -35,14 +35,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create([
+        $task = Task::create([
             'project_id' => $request->project_id,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'description' => "",
         ]);
 
-        return redirect()->back();
+        if ($task) {
+            return response()->json(['success' => 'true', 'task' => $task]);
+        } else {
+            return response()->json(['success' => 'false']);
+        }
     }
 
     /**

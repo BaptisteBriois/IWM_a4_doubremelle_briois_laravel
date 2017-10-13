@@ -17,7 +17,7 @@
                         <div class="panel-heading">
                             {{ $category->title }}
                         </div>
-                        <div class="panel-drag panel-body">
+                        <div class="panel-drag panel-body categoryTasks">
                             @foreach($category->tasks() as $task)
                                 <div class="panel panel-default">
                                     <div class="panel-body">
@@ -89,8 +89,7 @@
                     <div class="panel-body">
                         <form id="categoryForm" data-project-id="{{ $project->id }}">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="categoryTitle" placeholder="Titre"
-                                       name="title">
+                                <input type="text" class="form-control" placeholder="Titre" name="title">
                             </div>
                         </form>
                     </div>
