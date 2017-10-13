@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 41);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 44:
+/***/ 41:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(42);
 
 
 /***/ }),
 
-/***/ 45:
+/***/ 42:
 /***/ (function(module, exports) {
 
 dragula($('.panel-drag').toArray());
@@ -110,7 +110,7 @@ $(".taskForm").submit(function (e) {
         dataType: "json"
     }).done(function (response, status, jqXHR) {
         $(".taskForm[data-category-id=" + response.task.category_id + "]").find("input").val("");
-        $(".col-category[data-category-id=" + response.task.category_id + "]").find(".categoryTasks").append('<div class="panel panel-default">' + '<div class="panel-body">' + response.task.title + '</div>' + '</div>');
+        $(".col-category[data-category-id=" + response.task.category_id + "]").find(".categoryTasks").append('<div class="panel panel-default">' + '<div class="panel-body">' + response.task.title + '<button style="float: right" data-toggle="modal" data-target="#myModal' + response.task.id + '">Edit</button>' + '</div>' + '</div>' + '<div class="modal fade" id="myModal' + response.task.id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' + '<div class="modal-dialog" role="document">' + '<div class="modal-content">' + '<div class="modal-header">' + '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' + '<span aria-hidden="true">&times;</span>' + '</button>' + '<h4 class="modal-title" id="myModalLabel">Détails de la tâche</h4>' + '</div>' + '<form class="taskForm" data-project-id="' + response.task.project_id + '" data-category-id="' + response.task.category_id + '">' + '<div class="modal-body">' + '<div class="form-group">' + '<label for="taskTitle">Tâche</label>' + '<input id="taskTitle" type="text" class="form-control" placeholder="Titre" value="' + response.task.title + '" name="title">' + '</div>' + '<div class="form-group">' + '<label for="taskDescription">Description</label>' + '<textarea id="taskDescription" class="form-control" rows="3" name="description">' + response.task.description + '</textarea>' + '</div>' + '<div class="form-group">' + '<label for="taskLimitDate">Échéance</label>' + '<input id="taskLimitDate" type="text" class="datepicker form-control" placeholder="Titre" value="' + response.task.limit_date + '" name="limit-date">' + '</div>' + '</div>' + '<div class="modal-footer">' + '<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>' + '<button type="submit" class="btn btn-primary">Valider</button>' + '</div>' + '</form>' + '</div>' + '</div>' + '</div>');
     });
 });
 

@@ -22,44 +22,34 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         {{ $task->title }}
-                                        <button style="float: right" data-toggle="modal"
-                                                data-target="#myModal{{ $task->id }}">Edit
-                                        </button>
+                                        <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}">Edit</button>
                                     </div>
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="myModal{{ $task->id }}" tabindex="-1" role="dialog"
-                                     aria-labelledby="myModalLabel">
+                                <div class="modal fade" id="myModal{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
                                                 </button>
-                                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                                <h4 class="modal-title" id="myModalLabel">Détails de la tâche</h4>
                                             </div>
                                             <form class="taskForm" data-project-id="{{ $project->id }}" data-category-id="{{ $category->id }}">
                                                 <div class="modal-body">
-
                                                     <div class="form-group">
-                                                        <label for="taskTitle">Titre</label>
-                                                        <input id="taskTitle" type="text" class="form-control"
-                                                               placeholder="Titre" value="{{ $task->title }}"
-                                                               name="title">
+                                                        <label for="taskTitle">Tâche</label>
+                                                        <input id="taskTitle" type="text" class="form-control" placeholder="Titre" value="{{ $task->title }}" name="title">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="taskDescription">Description</label>
                                                         <textarea id="taskDescription" class="form-control" rows="3" name="description">{{ $project->description }}</textarea>
                                                     </div>
-
                                                     <div class="form-group">
                                                         <label for="taskLimitDate">Échéance</label>
-                                                        <input id="taskLimitDate" type="text" class="datepicker form-control"
-                                                               placeholder="Titre" value="{{ $task->limit_date }}"
-                                                               name="title">
+                                                        <input id="taskLimitDate" type="text" class="datepicker form-control" placeholder="Titre" value="{{ $task->limit_date }}" name="limit-date">
                                                     </div>
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -69,7 +59,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             @endforeach
                         </div>
                         <div class="panel-footer">
