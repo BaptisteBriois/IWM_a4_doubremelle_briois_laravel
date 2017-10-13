@@ -13,7 +13,7 @@
         <div id="container-tasks">
             @foreach($categories as $category)
                 <div class="col-category" data-category-id="{{ $category->id }}">
-                    <div class="panel panel-default">
+                    <div class="panel-category panel panel-default">
                         <div class="panel-heading">
                             {{ $category->title }}
                         </div>
