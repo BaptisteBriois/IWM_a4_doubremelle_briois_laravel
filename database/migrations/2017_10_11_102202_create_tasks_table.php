@@ -22,6 +22,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->date('limit_date')->nullable();
+            $table->integer('order')->unsigned();
             $table->timestamps();
         });
     }
