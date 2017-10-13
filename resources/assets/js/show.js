@@ -1,4 +1,28 @@
-dragula($('.panel-drag').toArray());
+var container = $('.panel-drag').toArray();
+var drake = dragula(container);
+
+drake.on('drop', function (el, target) {
+    category_id = $(target).data('category-id');
+    task_id = $(el).data('task-id');
+});
+
+var nodeListForEach = function (array, callback, scope) {
+    for (var i = 0; i < array.length; i++) {
+        callback.call(scope, i, array[i]);
+    }
+};
+
+drake.on('dragend', function (el) {
+    elParent = $(el).parent();
+    rows = $(elParent).find('.panel');
+
+    nodeListForEach(rows, function (index, row) {
+        row.lastElementChild.textContent = index + 1;
+        row.dataset.rowPosition = index + 1;
+    })
+});
+
+
 $('.datepicker').pickadate();
 
 $("#categoryForm").submit(function(e) {
