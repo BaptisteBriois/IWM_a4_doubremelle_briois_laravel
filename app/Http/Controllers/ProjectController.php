@@ -76,11 +76,11 @@ class ProjectController extends Controller
         $categories = $project->categories();
         $userId = Auth::id();
 
-        if (in_array($userId, json_decode($project->admin)) || in_array($userId, json_decode($project->viewer))) {
-            return view('project.show', compact('project', 'categories', 'userId'));
-        } else {
+        if (!in_array($userId, json_decode($project->admin)) && !in_array($userId, json_decode($project->viewer))) {
             return "Vous n'avez pas les droits pour voir ce projet";
         }
+
+        return view('project.show', compact('project', 'categories', 'userId'));
     }
 
     /**
@@ -92,6 +92,11 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour mettre à jour ce projet";
+        }
 
         return view('project.edit', compact('project'));
     }
@@ -106,6 +111,12 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $project = Project::find($id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour mettre à jour ce projet";
+        }
+
         $project->title = $request->title;
         $project->description = $request->description;
         $project->save();
@@ -122,6 +133,12 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = Project::find($id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour supprimer ce projet";
+        }
+
         $project->delete();
 
         return redirect()->route('projects.index');
@@ -136,6 +153,11 @@ class ProjectController extends Controller
     public function getProjectUsers($id)
     {
         $project = Project::find($id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour voir les utilisateurs de ce projet";
+        }
 
         $admins = json_decode($project->admin);
         $adminUsers = [];
