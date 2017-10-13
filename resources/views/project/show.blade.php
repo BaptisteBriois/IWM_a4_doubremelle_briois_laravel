@@ -25,6 +25,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-body">
                                         {{ $task->title }}
+                                @if(in_array($userId, json_decode($project->admin)))
                                         <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}">Edit</button>
                                     </div>
                                 </div>
@@ -62,6 +63,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                @else
+                                    </div>
+                                </div>
+                                @endif
                             @endforeach
                         </div>
                         <div class="panel-footer">
@@ -75,6 +80,7 @@
                 </div>
             @endforeach
 
+        @if(in_array($userId, json_decode($project->admin)))
             <div id="newCategory" class="col-category">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -86,6 +92,7 @@
                     </div>
                 </div>
             </div>
+        @endif
         </div>
     </div>
 
