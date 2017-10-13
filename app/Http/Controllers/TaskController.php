@@ -37,12 +37,14 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $projectId = Category::find($request->category_id)->project_id;
+        $lastOrder = Task::all()->where('category_id', $request->category_id)->sortByDesc('order')->first();
 
         $task = Task::create([
             'project_id' => $projectId,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'description' => "",
+            'order' => ($lastOrder) ? $lastOrder->order + 1 : 1
         ]);
 
         if ($task) {

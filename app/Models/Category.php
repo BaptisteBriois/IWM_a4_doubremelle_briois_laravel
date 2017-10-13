@@ -12,7 +12,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'project_id', 'title', 'order',
+        'project_id', 'title',
     ];
 
     public function project() {
