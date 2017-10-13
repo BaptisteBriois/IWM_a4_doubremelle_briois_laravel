@@ -15,18 +15,16 @@ $("#categoryForm").submit(function(e) {
     }).done(function (response, status, jqXHR) {
         $("#categoryForm").find("input").val("");
         $("#newCategory").before(
-            '<div class="col-category">' +
-                '<div class="panel panel-default">' +
+            '<div id="col-category-' + response.category.id + '" class="col-category">' +
+                '<div class="panel-category panel panel-default">' +
                     '<div class="panel-heading">' +
                         response.category.title + '' +
                     '</div>' +
-                    '<div class="panel-drag panel-body"></div>' +
+                    '<div class="panel-drag panel-body categoryTasks"></div>' +
                     '<div class="panel-footer">' +
-                        '<form class="taskForm" data-project-id="' + response.category.project_id + '" data-category-id="' + response.category.id + '">' +
+                        '<form class="taskForm" data-category-id="' + response.category.id + '">' +
                             '<div class="form-group">' +
-                                '<div class="form-group">' +
-                                    '<input type="text" class="form-control" id="taskTitle" placeholder="Titre" name="title">' +
-                                '</div>' +
+                                '<input type="text" class="form-control" placeholder="Titre" name="title">' +
                             '</div>' +
                         '</form>' +
                     '</div>' +
@@ -43,14 +41,13 @@ $(".taskForm").submit(function(e) {
         type: "POST",
         url: Routes["task_store"],
         data: {
-            project_id: $(this).data('project-id'),
             category_id: $(this).data('category-id'),
             title: $(this).find("input").val()
         },
         dataType: "json"
     }).done(function (response, status, jqXHR) {
         $(".taskForm[data-category-id=" + response.task.category_id + "]").find("input").val("");
-        $(".col-category[data-category-id=" + response.task.category_id + "]").find(".categoryTasks").append(
+        $("#col-category-" + response.task.category_id).find(".categoryTasks").append(
             '<div class="panel panel-default">' +
                 '<div class="panel-body">' +
                     response.task.title +

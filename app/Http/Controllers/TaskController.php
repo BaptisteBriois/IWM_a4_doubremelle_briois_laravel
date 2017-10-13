@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,10 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $projectId = Category::find($request->category_id)->project_id;
+
         $task = Task::create([
-            'project_id' => $request->project_id,
+            'project_id' => $projectId,
             'category_id' => $request->category_id,
             'title' => $request->title,
             'description' => "",

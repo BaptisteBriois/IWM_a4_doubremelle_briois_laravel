@@ -12,7 +12,7 @@
     <div id="container-categories">
         <div id="container-tasks">
             @foreach($categories as $category)
-                <div class="col-category" data-category-id="{{ $category->id }}">
+                <div id="col-category-{{ $category->id }}" class="col-category">
                     <div class="panel-category panel panel-default">
                         <div class="panel-heading">
                             {{ $category->title }}
@@ -36,7 +36,7 @@
                                                 </button>
                                                 <h4 class="modal-title" id="myModalLabel">Détails de la tâche</h4>
                                             </div>
-                                            <form class="taskForm" data-project-id="{{ $project->id }}" data-category-id="{{ $category->id }}">
+                                            <form id="taskDetail{{ $task->id }}">
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for="taskTitle">Tâche</label>
@@ -62,8 +62,7 @@
                             @endforeach
                         </div>
                         <div class="panel-footer">
-                            <form class="taskForm" data-project-id="{{ $project->id }}"
-                                  data-category-id="{{ $category->id }}">
+                            <form class="taskForm" data-category-id="{{ $category->id }}">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Titre" name="title">
                                 </div>
@@ -103,7 +102,8 @@
 
         Routes = {
             category_store: "{{ route('categories.store') }}",
-            task_store: "{{ route('tasks.store') }}"
+            task_store: "{{ route('tasks.store') }}",
+            task_update: "{{ route('tasks.update') }}"
         }
     </script>
     <script src="{{ asset('js/show.js') }}"></script>
