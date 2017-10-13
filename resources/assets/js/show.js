@@ -16,23 +16,38 @@ $("#categoryForm").submit(function(e) {
         $("#newCategory").before(
             '<div class="col-category">\n' +
                 '<div class="panel panel-default">\n' +
-                    '<div class="panel-body">\n' +
+                    '<div class="panel-heading">\n' +
                         response.category.title + '\n' +
-                        '<hr>\n' +
+                    '</div>\n' +
+                    '<div class="panel-drag panel-body"></div>\n' +
+                    '<div class="panel-footer">\n' +
                         '<form class="taskForm" data-project-id="' + response.category.project_id + '" data-category-id="' + response.category.id + '">\n' +
                             '<div class="form-group">\n' +
                                 '<div class="form-group">\n' +
-                                    '<input type="text" class="form-control" id="taskTitre" placeholder="Titre" name="title">\n' +
+                                    '<input type="text" class="form-control" id="taskTitle" placeholder="Titre" name="title">\n' +
                                 '</div>\n' +
-                                '<div class="form-group">\n' +
-                                    '<textarea id="projectDescription" class="form-control" rows="3" name="description" placeholder="Description"></textarea>\n' +
-                                '</div>\n' +
-                                '<button type="submit" class="btn btn-default">Valider</button>\n' +
                             '</div>\n' +
                         '</form>\n' +
                     '</div>\n' +
                 '</div>\n' +
             '</div>'
         )
+    });
+});
+
+$(".taskForm").submit(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: Routes["task_store"],
+        data: {
+            project_id: $(this).data('project-id'),
+            category_id: $(this).data('category_id'),
+            title: $(this).find("input").val()
+        },
+        dataType: "json"
+    }).done(function (response, status, jqXHR) {
+
     });
 });

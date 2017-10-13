@@ -39,7 +39,7 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
             'category_id' => $request->category_id,
             'title' => $request->title,
-            'description' => $request->description,
+            'description' => "",
         ]);
 
         return redirect()->back();

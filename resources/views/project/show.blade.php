@@ -12,7 +12,7 @@
     <div id="container-categories">
         <div id="container-tasks">
             @foreach($categories as $category)
-                <div class="col-category">
+                <div class="col-category" data-category-id="{{ $category->id }}">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             {{ $category->title }}
@@ -27,18 +27,9 @@
                             @endforeach
                         </div>
                         <div class="panel-footer">
-                            <form class="newTask" data-project-id="{{ $project->id }}"
-                                  data-category-id="{{ $category->id }}">
+                            <form class="taskForm" data-project-id="{{ $project->id }}" data-category-id="{{ $category->id }}">
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="taskTitre" placeholder="Titre"
-                                               name="title">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea id="projectDescription" class="form-control" rows="3"
-                                                  name="description" placeholder="Description"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-default">Valider</button>
+                                    <input type="text" class="form-control" placeholder="Titre" name="title">
                                 </div>
                             </form>
                         </div>
@@ -51,8 +42,7 @@
                     <div class="panel-body">
                         <form id="categoryForm" data-project-id="{{ $project->id }}">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="categoryTitle" placeholder="Titre"
-                                       name="title">
+                                <input type="text" class="form-control" id="categoryTitle" placeholder="Titre" name="title">
                             </div>
                         </form>
                     </div>
