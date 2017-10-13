@@ -44,11 +44,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="taskDescription">Description</label>
-                                                        <textarea id="taskDescription" class="form-control" rows="3" name="description">{{ $project->description }}</textarea>
+                                                        <textarea id="taskDescription" class="form-control" rows="3" name="description">{{ $task->description }}</textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="taskLimitDate">Échéance</label>
-                                                        <input id="taskLimitDate" type="text" class="datepicker form-control" placeholder="Titre" value="{{ $task->limit_date }}" name="limit-date">
+                                                        <input id="taskLimitDate" type="text" class="datepicker form-control" placeholder="Date" value="{{ $task->limit_date }}" name="limit-date">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
