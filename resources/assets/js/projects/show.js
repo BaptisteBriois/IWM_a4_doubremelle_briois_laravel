@@ -47,7 +47,8 @@ $("#categoryForm").submit(function(e) {
             '<div id="col-category-' + response.category.id + '" class="col-category">' +
                 '<div class="panel-category panel panel-default">' +
                     '<div class="panel-heading">' +
-                        response.category.title + '' +
+                        response.category.title + ' ' +
+                        '<button><i class="fa fa-close" aria-hidden="true"></i></button>' +
                     '</div>' +
                     '<div class="panel-drag panel-body categoryTasks"></div>' +
                     '<div class="panel-footer">' +
@@ -80,7 +81,8 @@ $(".taskForm").submit(function(e) {
             '<div class="panel panel-default">' +
                 '<div class="panel-body">' +
                     response.task.title +
-                    '<button style="float: right" data-toggle="modal" data-target="#myModal' + response.task.id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button>' +
+                    '<button data-toggle="modal" data-target="#myModal' + response.task.id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button>' +
+                    '<button><i class="fa fa-close" aria-hidden="true"></i></button>' +
                 '</div>' +
             '</div>' +
             '<div class="modal fade" id="myModal' + response.task.id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +

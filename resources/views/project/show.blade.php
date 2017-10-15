@@ -19,6 +19,7 @@
                     <div class="panel-category panel panel-default">
                         <div class="panel-heading">
                             {{ $category->title }}
+                            <button><i class="fa fa-close" aria-hidden="true"></i></button>
                         </div>
                         <div class="panel-drag panel-body categoryTasks" data-category-id="{{ $category->id }}">
                             @foreach($category->tasks() as $task)
@@ -27,8 +28,9 @@
                                     <div class="panel-body">
                                         {{ $task->title }}
                                 @if(in_array($userId, json_decode($project->admin)))
-                                        <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}"><i class="fa fa-pencil"
+                                        <button data-toggle="modal" data-target="#myModal{{ $task->id }}"><i class="fa fa-pencil"
                                                                                                                                   aria-hidden="true"></i></button>
+                                        <button><i class="fa fa-close" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
 
