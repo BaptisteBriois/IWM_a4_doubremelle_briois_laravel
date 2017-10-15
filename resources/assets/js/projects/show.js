@@ -25,7 +25,6 @@ drake.on('drop', function (el, target) {
         },
         dataType: "json"
     }).done(function (response, status, jqXHR) {
-
     });
 });
 
