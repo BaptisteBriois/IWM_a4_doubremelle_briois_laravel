@@ -48,7 +48,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -67,7 +67,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -86,7 +86,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -104,8 +104,8 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -127,7 +127,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -147,7 +147,7 @@ class ProjectController extends Controller
     /**
      * Get users for a specified project.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function getProjectUsers($id)
@@ -187,7 +187,7 @@ class ProjectController extends Controller
     /**
      * Add a new project admin.
      *
-     * @param  Request $request, int  $id
+     * @param  Request $request , int  $id
      * @return \Illuminate\Http\Response
      */
     public function addProjectAdmin(Request $request, $id)
@@ -222,7 +222,7 @@ class ProjectController extends Controller
     /**
      * Add a new project viewer.
      *
-     * @param  Request $request, int  $id
+     * @param  Request $request , int  $id
      * @return \Illuminate\Http\Response
      */
     public function addProjectViewer(Request $request, $id)
@@ -249,5 +249,50 @@ class ProjectController extends Controller
         } else {
             return "Un mail d'invitation sur notre plateforme a été envoyé à l'utilisateur";
         }
+    }
+
+    /**
+     * Add a new project viewer.
+     *
+     * @param  Request $request , int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function removeProjectUser(Request $request, $id)
+    {
+        $project = Project::find($id);
+        $projectAdmin = json_decode($project->admin);
+        $projectViewer = json_decode($project->viewer);
+
+        $userDel = $request->user_id;
+        $userRole = $request->user_role;
+
+
+        if ($userRole == 'admin') {
+            if (($key = array_search($userDel, $projectAdmin)) !== false) {
+                unset($projectAdmin[$key]);
+            }
+            $project->admin = json_encode($projectAdmin);
+
+            if ($project->save()) {
+                return response()->json(['success' => 'true']);
+            } else {
+                return response()->json(['success' => 'false']);
+            }
+
+        } else if ($userRole == 'viewer') {
+            if (($key = array_search($userDel, $projectViewer)) !== false) {
+                unset($projectViewer[$key]);
+            }
+            $project->viewer = json_encode($projectViewer);
+
+            if ($project->save()) {
+                return response()->json(['success' => 'true']);
+            } else {
+                return response()->json(['success' => 'false']);
+            }
+
+        }
+
+
     }
 }
