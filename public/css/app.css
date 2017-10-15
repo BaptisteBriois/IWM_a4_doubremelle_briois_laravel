@@ -8788,6 +8788,75 @@ h1 small {
   color: #fff;
 }
 
+#global {
+  background-color: #fff;
+  height: 100%;
+}
+
+#global h1 {
+  margin-top: 40px;
+  margin-bottom: 22px;
+  color: #333;
+}
+
+#global #global-projects a {
+  text-decoration: none;
+}
+
+#global #global-projects .panel-project {
+  position: relative;
+  padding: 10px;
+  background-color: #005B8F;
+  border-radius: 3px;
+  min-height: 96px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+#global #global-projects .panel-project a {
+  color: #fff;
+}
+
+#global #global-projects .panel-project .panel-project-options {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  font-size: 20px;
+}
+
+#global #global-projects .panel-project .panel-project-options form {
+  display: inline-block;
+}
+
+#global #global-projects .panel-project .panel-project-options button {
+  border: 0;
+  background-color: transparent;
+  outline: 0;
+}
+
+#global #global-projects .panel-project .panel-project-options .project-edit {
+  color: #4CAF50;
+}
+
+#global #global-projects .panel-project .panel-project-options .project-remove {
+  color: #F44336;
+}
+
+#global #global-projects .panel-project-create {
+  padding: 0;
+  line-height: 96px;
+  background-color: #E2E4E6;
+  color: #838c91;
+}
+
+#global.project-edit #global-projects .panel-project {
+  padding: 20px;
+  text-align: left;
+}
+
 #app {
   height: 100%;
   display: -webkit-box;
