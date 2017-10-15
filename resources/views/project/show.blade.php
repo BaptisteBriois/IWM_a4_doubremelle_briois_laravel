@@ -27,7 +27,8 @@
                                     <div class="panel-body">
                                         {{ $task->title }}
                                 @if(in_array($userId, json_decode($project->admin)))
-                                        <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}">Edit</button>
+                                        <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}"><i class="fa fa-pencil"
+                                                                                                                                  aria-hidden="true"></i></button>
                                     </div>
                                 </div>
 

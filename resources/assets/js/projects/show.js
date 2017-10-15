@@ -80,7 +80,7 @@ $(".taskForm").submit(function(e) {
             '<div class="panel panel-default">' +
                 '<div class="panel-body">' +
                     response.task.title +
-                    '<button style="float: right" data-toggle="modal" data-target="#myModal' + response.task.id + '">Edit</button>' +
+                    '<button style="float: right" data-toggle="modal" data-target="#myModal' + response.task.id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button>' +
                 '</div>' +
             '</div>' +
             '<div class="modal fade" id="myModal' + response.task.id + '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
