@@ -105,7 +105,20 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+        $categoryId = $task->category->id;
+
+        $category_tasks = Task::where('category_id', $categoryId)->where('order', '>', $task->order)->get();
+        foreach ($category_tasks as $category_task) {
+            $category_task->order -= 1;
+            $category_task->save();
+        }
+
+        if ($task->delete()) {
+            return response()->json(['success' => 'true', 'task_id' => $id]);
+        } else {
+            return response()->json(['success' => 'false']);
+        }
     }
 
     /**

@@ -19,7 +19,6 @@
                     <div class="panel-category panel panel-default">
                         <div class="panel-heading">
                             {{ $category->title }}
-                            <button><i class="fa fa-close" aria-hidden="true"></i></button>
                         </div>
                         <div class="panel-drag panel-body categoryTasks" data-category-id="{{ $category->id }}">
                             @foreach($category->tasks() as $task)
@@ -30,7 +29,7 @@
                                 @if(in_array($userId, json_decode($project->admin)))
                                         <button data-toggle="modal" data-target="#myModal{{ $task->id }}"><i class="fa fa-pencil"
                                                                                                                                   aria-hidden="true"></i></button>
-                                        <button><i class="fa fa-close" aria-hidden="true"></i></button>
+                                        <button class="deleteTask" data-task-id="{{ $task->id }}" data-order="{{ $task->order }}"><i class="fa fa-close" aria-hidden="true"></i></button>
                                     </div>
                                 </div>
 

@@ -141,6 +141,15 @@ $(".taskForm").submit(function (e) {
     });
 });
 
+$(".deleteTask").click(function (e) {
+    $.ajax({
+        type: "DELETE",
+        url: Routes["task_store"] + "/" + $(this).data("task-id")
+    }).done(function (response, status, jqXHR) {
+        $(".panel-default[data-task-id=" + response.task_id + "]").remove();
+    });
+});
+
 /***/ })
 
 /******/ });
