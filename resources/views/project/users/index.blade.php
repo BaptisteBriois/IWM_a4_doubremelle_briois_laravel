@@ -18,7 +18,14 @@
             <div id="adminList" class="panel-body">
                 <ul>
                     @foreach($admins as $admin)
-                        <li>{{ $admin->name }}</li>
+                        <li>
+                            {{ $admin->name }}
+                            <form class="removeUser" data-project-id="{{ $project->id }}">
+                                <input type="hidden" name="user_id" class="user_id" value="{{ $admin->id }}">
+                                <input type="hidden" name="user_role" class="user_role" value="admin">
+                                <button type="submit"><i class="fa fa-close" aria-hidden="true"></i></button>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -37,7 +44,14 @@
             <div id="viewerList" class="panel-body">
                 <ul>
                     @foreach($viewers as $viewer)
-                        <li>{{ $viewer->name }}</li>
+                        <li>
+                            {{ $viewer->name }}
+                            <form class="removeUser" data-project-id="{{ $project->id }}">
+                                <input type="hidden" name="user_id" class="user_id" value="{{ $viewer->id }}">
+                                <input type="hidden" name="user_role" class="user_role" value="viewer">
+                                <button type="submit"><i class="fa fa-close" aria-hidden="true"></i></button>
+                            </form>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -62,7 +76,8 @@
 
         Routes = {
             add_admin: "{{ route('projects.users.addAdmin', $project->id) }}",
-            add_viewer: "{{ route('projects.users.addViewer', $project->id) }}"
+            add_viewer: "{{ route('projects.users.addViewer', $project->id) }}",
+            remove_user: "{{ route('projects.users.removeUser', $project->id) }}"
         }
     </script>
     <script src="{{ asset('js/projects/users/index.js') }}"></script>
