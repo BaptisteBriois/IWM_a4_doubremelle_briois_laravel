@@ -3,7 +3,7 @@
 @section('content')
     <div id="global" class="project-edit">
         <div class="container">
-            <h1 class="text-center"><i class="fa fa-user" aria-hidden="true"></i> Editer un projet</h1>
+            <h1 class="text-center"><i class="fa fa-tasks" aria-hidden="true"></i> Editer un projet</h1>
 
             <div id="global-projects" class="row">
 
