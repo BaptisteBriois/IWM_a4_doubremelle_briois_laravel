@@ -22,13 +22,13 @@
                         </div>
                         <div class="panel-drag panel-body categoryTasks" data-category-id="{{ $category->id }}">
                             @foreach($category->tasks() as $task)
-                                <div class="panel panel-default" data-task-id="{{ $task->id }}">
+                                <div class="panel panel-default" data-task-id="{{ $task->id }}" data-order="{{ $task->order }}" data-row-position="{{
+                                $task->order }}">
                                     <div class="panel-body">
                                         {{ $task->title }}
                                 @if(in_array($userId, json_decode($project->admin)))
                                         <button style="float: right" data-toggle="modal" data-target="#myModal{{ $task->id }}">Edit</button>
                                     </div>
-                                    <span>{{ $task->order }}</span>
                                 </div>
 
                                 <!-- Modal -->
@@ -111,7 +111,8 @@
 
         Routes = {
             category_store: "{{ route('categories.store') }}",
-            task_store: "{{ route('tasks.store') }}"
+            task_store: "{{ route('tasks.store') }}",
+            task_order_update: "{{ route('tasks.updateOrder') }}"
         }
     </script>
     <script src="{{ asset('js/projects/show.js') }}"></script>

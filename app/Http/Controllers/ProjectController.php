@@ -193,6 +193,12 @@ class ProjectController extends Controller
     public function addProjectAdmin(Request $request, $id)
     {
         $project = Project::find($id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour voir les utilisateurs de ce projet";
+        }
+
         $projectAdmin = json_decode($project->admin);
         $projectViewer = json_decode($project->viewer);
 
@@ -229,6 +235,11 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $projectViewer = json_decode($project->viewer);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour voir les utilisateurs de ce projet";
+        }
 
         if ($user = User::where('email', $request->email)->first()) {
             if (!in_array($user->id, json_decode($project->admin))) {

@@ -27,4 +27,6 @@ Route::post('/projects/{id}/addViewer', 'ProjectController@addProjectViewer')->n
 
 Route::resource('/tasks', 'TaskController');
 
+Route::post('/tasks/updateOrder', 'TaskController@updateOrder')->name('tasks.updateOrder');
+
 Route::resource('/categories', 'CategoryController');

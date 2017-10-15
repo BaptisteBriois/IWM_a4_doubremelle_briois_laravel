@@ -1,25 +1,32 @@
 var container = $('.panel-drag').toArray();
 var drake = dragula(container);
 
-drake.on('drop', function (el, target) {
-    category_id = $(target).data('category-id');
-    task_id = $(el).data('task-id');
-});
-
 var nodeListForEach = function (array, callback, scope) {
     for (var i = 0; i < array.length; i++) {
         callback.call(scope, i, array[i]);
     }
 };
 
-drake.on('dragend', function (el) {
+drake.on('drop', function (el, target) {
     elParent = $(el).parent();
     rows = $(elParent).find('.panel');
 
     nodeListForEach(rows, function (index, row) {
-        row.lastElementChild.textContent = index + 1;
         row.dataset.rowPosition = index + 1;
-    })
+    });
+
+    $.ajax({
+        type: "POST",
+        url: Routes["task_order_update"],
+        data: {
+            task_id: $(el).data('task-id'),
+            category_id: $(target).data('category-id'),
+            new_order: $(el).data('row-position')
+        },
+        dataType: "json"
+    }).done(function (response, status, jqXHR) {
+
+    });
 });
 
 $('.datepicker').pickadate();

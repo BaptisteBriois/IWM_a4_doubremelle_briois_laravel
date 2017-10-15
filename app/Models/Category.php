@@ -20,6 +20,6 @@ class Category extends Model
     }
 
     public function tasks() {
-        return $this->hasMany(Task::class)->get();
+        return $this->hasMany(Task::class)->orderBy('order')->get();
     }
 }
