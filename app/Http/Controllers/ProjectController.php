@@ -232,12 +232,16 @@ class ProjectController extends Controller
 
         if ($user = User::where('email', $request->email)->first()) {
             if (!in_array($user->id, json_decode($project->admin))) {
-                array_push($projectViewer, $user->id);
-                $project->viewer = json_encode($projectViewer);
-                if ($project->save()) {
-                    return response()->json(['success' => 'true', 'user' => $user]);
+                if (!in_array($user->id, json_decode($project->viewer))) {
+                    array_push($projectViewer, $user->id);
+                    $project->viewer = json_encode($projectViewer);
+                    if ($project->save()) {
+                        return response()->json(['success' => 'true', 'user' => $user]);
+                    } else {
+                        return response()->json(['success' => 'false']);
+                    }
                 } else {
-                    return response()->json(['success' => 'false']);
+                    return "Cet utilisateur est déjà spectateur du projet";
                 }
             } else {
                 return "Cet utilisateur est déjà administrateur du projet";

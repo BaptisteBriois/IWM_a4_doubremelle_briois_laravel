@@ -22,7 +22,6 @@ drake.on('dragend', function (el) {
     })
 });
 
-
 $('.datepicker').pickadate();
 
 $("#categoryForm").submit(function(e) {
