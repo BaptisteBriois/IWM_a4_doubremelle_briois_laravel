@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -35,6 +36,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $project = Project::find($request->project_id);
+        $userId = Auth::id();
+
+        if (!in_array($userId, json_decode($project->admin))) {
+            return "Vous n'avez pas les droits pour créer une catégorie sur ce projet";
+        }
+
         $category = Category::create([
             'title' => $request->title,
             'project_id' => $request->project_id,

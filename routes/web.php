@@ -28,4 +28,6 @@ Route::post('/projects/{id}/removeUser', 'ProjectController@removeProjectUser')-
 
 Route::resource('/tasks', 'TaskController');
 
+Route::post('/tasks/updateOrder', 'TaskController@updateOrder')->name('tasks.updateOrder');
+
 Route::resource('/categories', 'CategoryController');
