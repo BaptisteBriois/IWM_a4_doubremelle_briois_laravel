@@ -81,19 +81,19 @@
                 </div>
             @endforeach
 
-        @if(in_array($userId, json_decode($project->admin)))
-            <div id="newCategory" class="col-category">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <form id="categoryForm" data-project-id="{{ $project->id }}">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Titre" name="title">
-                            </div>
-                        </form>
+            @if(in_array($userId, json_decode($project->admin)))
+                <div id="newCategory" class="col-category">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form id="categoryForm" data-project-id="{{ $project->id }}">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Titre" name="title">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
         </div>
     </div>
 
@@ -114,5 +114,5 @@
             task_store: "{{ route('tasks.store') }}"
         }
     </script>
-    <script src="{{ asset('js/show.js') }}"></script>
+    <script src="{{ asset('js/projects/show.js') }}"></script>
 @endsection

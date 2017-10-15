@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/projects', 'ProjectController');
 
 Route::get('/projects/{id}/users', 'ProjectController@getProjectUsers')->name('projects.users.index');
+Route::post('/projects/{id}/addAdmin', 'ProjectController@addProjectAdmin')->name('projects.users.addAdmin');
+Route::post('/projects/{id}/addViewer', 'ProjectController@addProjectViewer')->name('projects.users.addViewer');
 
 Route::resource('/tasks', 'TaskController');
 

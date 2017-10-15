@@ -21,8 +21,8 @@ class CreateTasksTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title');
             $table->text('description');
-            $table->date('limit_date')->nullable();
             $table->integer('order')->unsigned();
+            $table->date('limit_date')->nullable();
             $table->timestamps();
         });
     }

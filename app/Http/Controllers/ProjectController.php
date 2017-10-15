@@ -183,4 +183,67 @@ class ProjectController extends Controller
 
         return view('project.users.index', $data);
     }
+
+    /**
+     * Add a new project admin.
+     *
+     * @param  Request $request, int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectAdmin(Request $request, $id)
+    {
+        $project = Project::find($id);
+        $projectAdmin = json_decode($project->admin);
+        $projectViewer = json_decode($project->viewer);
+
+        if ($user = User::where('email', $request->email)->first()) {
+            if (!in_array($user->id, json_decode($project->admin))) {
+                array_push($projectAdmin, $user->id);
+                $project->admin = json_encode($projectAdmin);
+                if (in_array($user->id, json_decode($project->viewer))) {
+                    $key = array_search($user->id, $projectViewer);
+                    unset($projectViewer[$key]);
+                    $project->viewer = json_encode($projectViewer);
+                }
+                if ($project->save()) {
+                    return response()->json(['success' => 'true', 'user' => $user]);
+                } else {
+                    return response()->json(['success' => 'false']);
+                }
+            } else {
+                return "Cet utilisateur est déjà administrateur du projet";
+            }
+
+        } else {
+            return "Un mail d'invitation sur notre plateforme a été envoyé à l'utilisateur";
+        }
+    }
+
+    /**
+     * Add a new project viewer.
+     *
+     * @param  Request $request, int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addProjectViewer(Request $request, $id)
+    {
+        $project = Project::find($id);
+        $projectViewer = json_decode($project->viewer);
+
+        if ($user = User::where('email', $request->email)->first()) {
+            if (!in_array($user->id, json_decode($project->admin))) {
+                array_push($projectViewer, $user->id);
+                $project->viewer = json_encode($projectViewer);
+                if ($project->save()) {
+                    return response()->json(['success' => 'true', 'user' => $user]);
+                } else {
+                    return response()->json(['success' => 'false']);
+                }
+            } else {
+                return "Cet utilisateur est déjà administrateur du projet";
+            }
+        } else {
+            return "Un mail d'invitation sur notre plateforme a été envoyé à l'utilisateur";
+        }
+    }
 }
